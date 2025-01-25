@@ -1,3 +1,2 @@
-# Atividade referente a Sprint1 - Módulo "Utilizando laços de repetição".
+# Atividade referente a Sprint2 - Módulo "Identificando programação Orientada a Objetos".
 
-# Sprint2
