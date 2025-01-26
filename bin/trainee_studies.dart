@@ -1,31 +1,32 @@
-void main(List<String> arguments){
+void main(){
   String nome = "Laranja";
   double peso = 98;
+  String cor = "Verde e Amarela";
+  String sabor = "Doce e cítrica";
   int diasDesdeColheita = 30;
-  int diasParaMadura = 20;
-  bool isMadura = funcIsMadura(diasDesdeColheita);
+  bool isMadura;
 
-  toString(nome: nome, peso: peso, diasDesdeColheita: diasDesdeColheita, diasParaMadura: diasParaMadura, isMadura: isMadura);
+  Fruta laranja = Fruta(nome, peso, cor, sabor, diasDesdeColheita);
+
+  print(laranja.nome);
+  laranja.estaMadura(40);
 }
 
-bool funcIsMadura(int dias){
-  if (dias >= 30){
-    return true;
-  } else {
-    return false;
+class Fruta{
+  String nome;
+  double peso;
+  String cor;
+  String sabor;
+  int diasDesdeColheita;
+  bool? isMadura;
+
+  Fruta(this.nome, this.peso, this.cor, this.sabor, this.diasDesdeColheita, {this.isMadura});
+
+  estaMadura(int diasParaMadura){
+    isMadura = diasDesdeColheita >= diasParaMadura;
+    print("A sua $nome foi colhida a $diasDesdeColheita dias, "
+          "e precisa de $diasParaMadura para poder comer. "
+          "Ela está madura? $isMadura");
   }
 }
 
-void toString({required String nome, required double peso, required int diasDesdeColheita, required int diasParaMadura, required bool isMadura}){
-  String? madura;
-  if(funcIsMadura(diasDesdeColheita)){
-    madura = "está madura";
-  } else {
-    madura = "não está madura";
-  }
-
-  print("A $nome pesa $peso gramas! "
-        "Ela foi colhida há $diasDesdeColheita dias "
-        "e precisa de $diasParaMadura para amadurecer, "
-        "logo, a $nome $madura!");
-}
