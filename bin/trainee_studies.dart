@@ -1,68 +1,67 @@
-void main(){
-  String nome = "Banana";
-  double peso = 75;
-  String cor = "Amarela";
-  String sabor = "Doce e cítrica";
-  int diasDesdeColheita = 30;
-  bool isMadura;
+void main() {
+  Nozes noz = Nozes("Noz", 30, "Marrom", "Neutro", 30, 50);
 
-  Fruta macadamia = Fruta("Macadâmia", 2, "Branco Amarelado", sabor, diasDesdeColheita);
-  Fruta banana = Fruta(nome, peso, cor, sabor, diasDesdeColheita);
-  Fruta limao = Fruta("Limão", 100, "Verde", sabor, diasDesdeColheita);
-  Legume macaxeira = Legume("Macaxeira", 1200, "Marrom", true);
-
-
-  macadamia.printAlimento();
-  banana.printAlimento();
-  macaxeira.printAlimento();
-  limao.printAlimento();
-  macaxeira.cozinhar();
-  limao.fazerSuco();
-
+  noz.fazerMassa();
 }
 
-class Alimento{
+abstract class Bolo {
+  void separarIngredientes();
+
+  void fazerMassa();
+
+  void assar();
+}
+
+class Alimento {
   String nome;
   double peso;
   String cor;
 
   Alimento(this.nome, this.peso, this.cor);
 
-  void printAlimento(){
+  void printAlimento() {
     print("Este(a) $nome pesa $peso gramas e é $cor");
   }
 }
 
-class Fruta extends Alimento {
+class Fruta extends Alimento implements Bolo {
   String sabor;
   int diasDesdeColheita;
   bool? isMadura;
 
-  Fruta(String nome, double peso, String cor, this.sabor, this.diasDesdeColheita, {this.isMadura}): super(nome, peso, cor);
+  Fruta(
+      String nome, double peso, String cor, this.sabor, this.diasDesdeColheita,
+      {this.isMadura})
+      : super(nome, peso, cor);
 
-  estaMadura(int diasParaMadura){
-    isMadura = diasDesdeColheita >= diasParaMadura;
-    print("A sua $nome foi colhida a $diasDesdeColheita dias, "
-        "e precisa de $diasParaMadura para poder comer. "
-        "Ela está madura? $isMadura");
+  @override
+  void assar() {
+    print("Colocar no forno");
   }
 
-  void fazerSuco(){
-    print("Você fez um ótimo suco de $nome");
+  @override
+  void fazerMassa() {
+    print("Misturar a $nome com farinha, açucar, ovos...");
   }
-}
 
-class Legume extends Alimento{
-  bool isPrecisaCozinhar;
-
-  Legume(String nome, double peso, String cor, this.isPrecisaCozinhar) : super(nome, peso, cor);
-
-  void cozinhar(){
-    if(isPrecisaCozinhar){
-      print("Portanto, $nome está cozinhando!");
-    } else {
-      print("Nem precisa cozinhar");
-    }
+  @override
+  void separarIngredientes() {
+    print("Catar a $nome");
   }
 }
 
+class Nozes extends Fruta {
+  double porcentagemOleo;
+
+  Nozes(String nome, double peso, String cor, String sabor,
+      int diasDesdeColheita, this.porcentagemOleo)
+      : super(nome, peso, cor, sabor, diasDesdeColheita);
+
+
+  @override
+  void fazerMassa() {
+    print("Tirar a casca");
+    super.fazerMassa();
+  }
+
+}
