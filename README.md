@@ -1,3 +1,1 @@
-# Atividade referente a Sprint1 - Módulo "Utilizando laços de repetição".
-
-# Sprint2
+# Atividade referente a Sprint2 - Módulo "Entendendo Funções e Escopo".
